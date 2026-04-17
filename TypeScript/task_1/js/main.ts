@@ -1,12 +1,36 @@
-// Interface for the function
-interface printTeacherFunction {
-  (firstName: string, lastName: string): string;
+interface StudentConstructor {
+  firstName: string;
+  lastName: string;
 }
 
-// Function implementation
-const printTeacher: printTeacherFunction = (firstName, lastName) => {
-  return `${firstName.charAt(0)}. ${lastName}`;
-};
+interface StudentClassInterface {
+  workOnHomework(): string;
+  displayName(): string;
+}
+
+class StudentClass implements StudentClassInterface {
+  firstName: string;
+  lastName: string;
+
+  constructor({ firstName, lastName }: StudentConstructor) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  workOnHomework(): string {
+    return "Currently working";
+  }
+
+  displayName(): string {
+    return this.firstName;
+  }
+}
 
 // Test
-console.log(printTeacher("John", "Doe"));
+const student = new StudentClass({
+  firstName: "John",
+  lastName: "Doe",
+});
+
+console.log(student.displayName());
+console.log(student.workOnHomework());
