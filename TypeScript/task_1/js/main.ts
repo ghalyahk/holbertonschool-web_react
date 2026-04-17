@@ -1,18 +1,23 @@
+// Teacher interface
 interface Teacher {
-  readonly firstName: string;
-  readonly lastName: string;
-  fullTimeEmployee: boolean;
-  yearsOfExperience?: number;
+  firstName: string;
+  lastName: string;
   location: string;
-  [key: string]: any;
+  fullTimeEmployee: boolean;
 }
 
-const teacher3: Teacher = {
+// Directors interface extends Teacher
+interface Directors extends Teacher {
+  numberOfReports: number;
+}
+
+// Create object
+const director1: Directors = {
   firstName: 'John',
   lastName: 'Doe',
-  fullTimeEmployee: false,
   location: 'London',
-  contract: false,
+  fullTimeEmployee: true,
+  numberOfReports: 17,
 };
 
-console.log(teacher3);
+console.log(director1);
