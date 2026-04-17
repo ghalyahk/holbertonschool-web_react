@@ -1,59 +1,16 @@
-interface DirectorInterface {
-  workFromHome(): string;
-  getCoffeeBreak(): string;
-  workDirectorTasks(): string;
+// Type predicate
+function isDirector(employee: Director | Teacher): employee is Director {
+  return employee instanceof Director;
 }
 
-interface TeacherInterface {
-  workFromHome(): string;
-  getCoffeeBreak(): string;
-  workTeacherTasks(): string;
-}
-
-// Director class
-class Director implements DirectorInterface {
-  workFromHome(): string {
-    return "Working from home";
+// executeWork function
+function executeWork(employee: Director | Teacher): string {
+  if (isDirector(employee)) {
+    return employee.workDirectorTasks();
   }
-
-  getCoffeeBreak(): string {
-    return "Getting a coffee break";
-  }
-
-  workDirectorTasks(): string {
-    return "Getting to director tasks";
-  }
-}
-
-// Teacher class
-class Teacher implements TeacherInterface {
-  workFromHome(): string {
-    return "Cannot work from home";
-  }
-
-  getCoffeeBreak(): string {
-    return "Cannot have a break";
-  }
-
-  workTeacherTasks(): string {
-    return "Getting to work";
-  }
-}
-
-// type guard function
-function isNumber(value: any): value is number {
-  return typeof value === "number";
-}
-
-// createEmployee function
-function createEmployee(salary: number | string): Director | Teacher {
-  if (isNumber(salary) && salary < 500) {
-    return new Teacher();
-  }
-  return new Director();
+  return employee.workTeacherTasks();
 }
 
 // Tests
-console.log(createEmployee(200));
-console.log(createEmployee(1000));
-console.log(createEmployee("$500"));
+console.log(executeWork(createEmployee(200)));
+console.log(executeWork(createEmployee(1000)));
