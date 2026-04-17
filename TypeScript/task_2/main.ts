@@ -1,16 +1,14 @@
-// Type predicate
-function isDirector(employee: Director | Teacher): employee is Director {
-  return employee instanceof Director;
-}
+// String literal type
+type Subjects = "Math" | "History";
 
-// executeWork function
-function executeWork(employee: Director | Teacher): string {
-  if (isDirector(employee)) {
-    return employee.workDirectorTasks();
+// Function
+function teachClass(todayClass: Subjects): string {
+  if (todayClass === "Math") {
+    return "Teaching Math";
   }
-  return employee.workTeacherTasks();
+  return "Teaching History";
 }
 
 // Tests
-console.log(executeWork(createEmployee(200)));
-console.log(executeWork(createEmployee(1000)));
+console.log(teachClass("Math"));
+console.log(teachClass("History"));
